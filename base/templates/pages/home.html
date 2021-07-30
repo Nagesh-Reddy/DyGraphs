@@ -1,0 +1,63 @@
+{% extends 'global.html' %}
+{% load static %}
+<html>
+    <head>
+        {% block head %}
+        <title>Home</title>
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+        <div class="btn-group mr-2 " style="float:right; width: 700px; height: 440px;">
+            <video width="700" height="440" controls autoplay> 
+                <source src="{% static 'demo.mp4' %}" type="video/mp4"></source>
+              </video> 
+      </div>
+        <div class="btn-group mr-2 " style="margin-top:6%; float:left; width: 300px; height: 440px;">
+            <h3 style="color:rgb(0, 0, 0);">Welcome, This is a dashboard generating tool project. By using the CSV files we can create dashbaords in this project. Please have a look at the demo video.</h3> 
+                  <!-- 
+                    <img src="/static/logo.png" alt="..." width="220" height="220" class="">   
+                     -->
+          </div>
+              <div class="btn-group mr-2 " style="float:right;">
+            <h4 style="color:rgb(87, 50, 50);">
+            For this project purpose we have used HighChart and Google Chart APIs as reference to generate Graphs.
+            For now we have used 5 types of Charts.
+            <br><br>
+            <ul>
+                <li>
+                    Geo Chart
+                </li>
+                <li>
+                    Column Chart
+                </li>
+                <li >
+                    Heat Map
+                </li>
+                <li>
+                    Bubble Chart
+                </li>
+                <li>
+                    Scattered Chart
+                </li>
+              </ul>
+            <br>
+            Following are the programming languages used to build this project : 
+            <br><br>
+            <ul>
+                <li>
+                    Python Django
+                </li>
+                <li>
+                    HTML5
+                </li>
+                <li >
+                    CSS Styles
+                </li>
+               
+              </ul>
+        </h4>
+        {% endblock %}
+    </div>
+    </body>
+</html>

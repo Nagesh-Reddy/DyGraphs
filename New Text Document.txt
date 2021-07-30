@@ -1,0 +1,3 @@
+Nagesh@0618
+
+settings SECRET_KEY = '1b4+ptv_pl-9l$vn!zuhnw_(#jh3ai4o*ih)a5emm%@e)xlwf9'

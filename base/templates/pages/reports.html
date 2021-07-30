@@ -1,0 +1,594 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>Reports | DyGraphs</title>
+    <link rel = "icon" type = "image/png" href = "/static/titile.png"> 
+    <!-- For apple devices --> 
+    <link rel = "apple-touch-icon" type = "image/png" href = "/static/titile.png"/> 
+    <meta charset="utf-8" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  </head>
+  <body style="background-image: url('{% static '/13.jpg' %}'); background-size: 1800px 900px; background-repeat: no-repeat; background-position: top; background-attachment: fixed;">
+    
+    <!-- Top Bar -->
+    <div class="container" style="background-color: rgba(0, 185, 176, 0.993); margin-top:1%">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="/basep">
+            <img src="/static/logo.png" alt="..." width="60"  class="">
+            <b>DyGraphs | Reporting Tool</b></a>
+          
+          <div class="collapse navbar-collapse" id="navbarNav">
+            
+          </div>
+          <div id="navbar"  style="float:right;">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="/basep"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    Home <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/basep/reports"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Reports
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/basep/design"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                    Design
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/basep/profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    People
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        
+    </div>
+    <br>
+    
+    <div class="container" style="background-image: url('{% static '/13.jpg' %}'); background-size: 1800px 900px; background-repeat: no-repeat; background-position: top; background-attachment: fixed;">  
+        <!-- map1  Chart -->
+        <div class="rightarrowdiv" style="margin-top:4%; float:left; width: 400px; height: 200px; margin: 1 auto">
+          <h5>This is a Geo Chart. It is showing the total number of respondants from each country 
+                  in StackOverFlow 2019 public survey.  
+          </h5>
+          </div>
+        <div class="col-md-32" id="regions_div" style="margin-top:1%; float:right; width: 650px; height: 300px; margin: 1 auto; border: 2px dashed rgba(1, 24, 87, 0.616);"></div>
+        <!-- Column Chart -->
+        <div class="col-md-32" id="ColumnChart" style="margin-top:3%; float:left; width: 650px; height: 300px; margin: 1 auto; border: 2px dashed rgba(1, 24, 87, 0.616);"></div>
+        <div class="leftarrowdiv" style="margin-top:6%; float:right; width: 400px; height: 200px; margin: 1 auto">
+          <h5>This is a Colummn Chart. It is showing the total number of respondants's Age when first 
+            coding started from StackOverFlow 2019 public survey.  
+          </h5>
+          </div>
+        <!-- Heat Chart -->
+        
+        <div class="col-md-32" id="HeatChart" style="margin-top:3%; float:right; width: 650px; height: 300px; margin: 1 auto; border: 2px dashed rgba(1, 24, 87, 0.616);"></div>
+        <div class="rightarrowdiv" style="margin-top:6%; float:left; width: 400px; height: 200px; margin: 1 auto">
+          <h5>This is a Heat Map. It is showing Total number of people Their Employement and Main Branch of 
+            coding and the data from StackOverFlow 2019 public survey.
+          </h5>
+          </div>
+        <!-- Bubble Chart -->
+        <div class="col-md-32" id="BubbleChart" style="margin-top:3%; float:left; width: 650px; height: 300px; margin: 1 auto; border: 2px dashed rgba(1, 24, 87, 0.616);"></div>
+        <div class="leftarrowdiv" style="margin-top:6%; float:right; width: 400px; height: 200px; margin: 1 auto">
+          <h5>This is a Bubble Chart. It is showing Contry wise Percentage of Python Developres among the total respondants
+             from StackOverFlow 2019 public survey.
+          </h5>
+          </div>
+        
+        <!--
+          <input id="save-pdf" type="button" value="Save as PDF"/>
+        -->
+        <!-- import option 
+        <div class="btn-group mr-2" style="float:right; margin-top:3%; border: 2px dashed lightgreen;">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                    Share
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                    Export
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                    This week
+                </button>
+        </div>  
+        -->
+      <!-- Table data -->
+        <div class="table-responsive">
+          <h2 class="pt-4"><hr><b>Data Sheet</b></h2>
+          <p class="text-danger"><b>Fetched from Uploaded CSV file</b></p>
+          {{table_data|safe}}
+        </div>
+    </div>
+	
+    <!-- highchart libraries -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    
+    <!-- Column Chart -->
+    <script>
+      _categories = {{ categories|safe }};
+      _values = {{ values|safe }};
+      
+      Highcharts.chart('ColumnChart', {
+          chart: {
+                    type: 'column'
+                  },
+          title: {
+                    text: 'Age wise total count when coding started'
+                  },
+          subtitle: {
+                    text: '()'
+                   },
+          xAxis: {
+                    categories:_categories,
+                    crosshair: true
+                  },
+          yAxis: {
+                    min: 0,
+                    title: {
+                            text: 'Total number of persons'
+                            }
+                   },
+          tooltip: {
+            headerFormat: '<span style="font-size:20px">{series.name} {point.key}</span><table>',
+              pointFormat: '<tr><td style="padding:0"> is : </td>' +
+		                         '<td style="padding:0; font-size:20px"><b>{point.y:.f} </b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+	            },
+	  plotOptions: {
+              column: {
+		              pointPadding: 0.2,
+                  borderWidth: 0
+                        }
+	            },
+          series: [{
+                    name: 'Age when coding started',
+                    data: _values,
+                    color: '#808080'
+              
+          }]
+      });
+      </script>
+
+
+      <!-- Bubble Chart -->
+      <script>
+        Highcharts.chart('BubbleChart', {
+
+            chart: {
+                type: 'bubble',
+                plotBorderWidth: 1,
+                zoomType: 'xy'
+            },
+
+            legend: {
+                enabled: false
+            },
+
+            title: {
+                text: 'Percent of Python Developers By Country'
+            },
+
+            subtitle: {
+                text: '---------------------------------------'
+            },
+
+            accessibility: {
+                
+            },
+
+            xAxis: {
+                gridLineWidth: 1,
+                title: {
+                    text: 'Total number of respondants from Each Country'
+                },
+                labels: {
+                    format: '{value}'
+                },
+                
+                accessibility: {
+                    rangeDescription: ''
+                }
+            },
+
+            yAxis: {
+                startOnTick: false,
+                endOnTick: false,
+                title: {
+                    text: 'Number of Respondents Knows Python Language'
+                },
+                labels: {
+                    format: '{value}'
+                },
+                maxPadding: 0.2,
+                accessibility: {
+                    rangeDescription: ''
+                }
+            },
+
+            tooltip: {
+                useHTML: true,
+                headerFormat: '<table>',
+                pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
+                    '<tr><th>#Respondents:</th><td>{point.x}</td></tr>' +
+                    '<tr><th>#KnowsPython:</th><td>{point.y}</td></tr>' +
+                    '<tr><th>%KnowsPython:</th><td>{point.z}%</td></tr>',
+                footerFormat: '</table>',
+                followPointer: true
+            },
+
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    }
+                }
+            },
+
+            series: [{
+                data: [
+                    { x: 253,	y: 131,	 z: 51.778656,	name: 'US' ,	country: 'United States'	},	
+                    { x: 88,	y: 37,	 z: 42.045455,	name: 'Ind',	country: 'India'	        },
+                    { x: 63,	y: 29,	 z: 46.031746,	name: 'UK',		country: 'United Kingdom'   },
+                    { x: 54,	y: 26,	 z: 48.148148,	name: 'DE',		country: 'Germany'		    },
+                    { x: 43,	y: 19,	 z: 44.186047,	name: 'CAN',	country: 'Canada'			},
+                    { x: 35,	y: 15,	 z: 42.857143,	name: 'FR',		country: 'France'			},	
+                    { x: 31,	y: 13,	 z: 41.935484,	name: 'NL',		country: 'Netherlands'      },
+                    { x: 28,	y: 13,	 z: 46.428571,	name: 'AUS',	country: 'Australia'	    },
+                    { x: 24,	y: 8,	 z: 33.333333,	name: 'RU',		country: 'Russian'			},
+                    { x: 19,	y: 5,	 z: 26.315789,	name: 'SPN',	country: 'Spain'            },
+                    { x: 18,	y: 7,	 z: 38.888889,	name: 'BR',		country: 'Brazil'			},	
+                    { x: 18,	y: 10,	 z: 55.555556,	name: 'PL',		country: 'Poland'			},	
+                    { x: 17,	y: 10,	 z: 58.823529,	name: 'IT',		country: 'Italy'			},
+                    { x: 16,	y: 8,	 z: 50.000000,	name: 'SW',		country: 'Sweden'			},	
+                    { x: 14,	y: 2,	 z: 14.285714,	name: 'IS',		country: 'Israel'			},	
+                    { x: 12,	y: 3,	 z: 25.000000,	name: 'UKR',	country: 'Ukraine'			},	
+                    { x: 12,	y: 3,	 z: 25.000000,	name: 'SS',		country: 'South Africa'     },
+                    { x: 12,	y: 5,	 z: 41.666667,	name: 'ATR',	country: 'Austria'		    },
+                    { x: 11,	y: 5,	 z: 45.454545,	name: 'PK',		country: 'Pakistan'			},
+                    { x: 11,	y: 2,	 z: 18.181818,	name: 'SLND',	country: 'Switzerland'      }
+                      ]
+                  }]
+
+                  });
+      </script>
+
+    <!-- Heat Chart -->
+    <script>
+          function getPointCategoryName(point, dimension) {
+            var series = point.series,
+                isY = dimension === 'y',
+                axis = series[isY ? 'yAxis' : 'xAxis'];
+            return axis.categories[point[isY ? 'y' : 'x']];
+                }
+
+                Highcharts.chart('HeatChart', {
+
+                    chart: {
+                        type: 'heatmap',
+                        marginTop: 40,
+                        marginBottom: 80,
+                        plotBorderWidth: 1
+                    },
+
+
+                    title: {
+                        text: 'Employement and MainBranch'
+                    },
+
+                    xAxis: {
+                      categories: ['Developer', 'Not a developer', 'Was a developer',	'Student', 'As a hobby']
+                    },
+
+                    yAxis: {
+                      categories: ['Employed full-time', 'Employed part-time', 'contractor, freelancer', 'Not employed', 'Looking for work', 'Retired'],
+                        title: null,
+                        reversed: true
+                    },
+
+                    accessibility: {
+                        point: {
+                            descriptionFormatter: function (point) {
+                                var ix = point.index + 1,
+                                    xName = getPointCategoryName(point, 'x'),
+                                    yName = getPointCategoryName(point, 'y'),
+                                    val = point.value;
+                                return '';
+                            }
+                        }
+                    },
+
+                    colorAxis: {
+                        min: 0,
+                        minColor: '#FFFFFF',
+                        maxColor: Highcharts.getOptions().colors[7]
+                    },
+
+                    legend: {
+                        align: 'right',
+                        layout: 'vertical',
+                        margin: 0,
+                        verticalAlign: 'top',
+                        y: 25,
+                        symbolHeight: 280
+                    },
+
+                    tooltip: {
+                        formatter: function () {
+                            return '<b>' + getPointCategoryName(this.point, 'x') + '</b> Count <br><b>' +
+                                this.point.value + '</b> Having mainBranch as <br><b>' + getPointCategoryName(this.point, 'y') + '</b>';
+                        }
+                    },
+
+                    series: [{
+                        name: 'Sales per employee',
+                        borderWidth: 1,
+                        data: [[0,0,65], [0,1,32], [0,2,51], [0,3,1],  [0,4,10], [0,5,0], [1,0,5], [1,1,57], [1,2,9], [1,3,0], [1,4,5], [1,5,0], [2,0,10], [2,1,1], [2,2,2], [2,3,1], [2,4,2],  [2,5,1], [3,0,9], [3,1,24], [3,2,8], [3,3,24], [3,4,36], [3,5,0], [4,0,3],  [4,1,4], [4,2,6], [4,3,7], [4,4,6], [4,5,45]],
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000'
+                        }
+                    }],
+
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                yAxis: {
+                                    labels: {
+                                        formatter: function () {
+                                            return this.value.charAt(0);
+                                        }
+                                    }
+                                }
+                            }
+                        }]
+                    }
+
+                });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    
+    
+    <!-- Google map library Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.0','packages':['geochart']},{'name':'visualization','version':'1.0','packages':['controls']}]}"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+        
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+			['Country', '#Respondants'],
+			['United States         ',  253],
+			['India                 ',   88],
+			['United Kingdom        ',   63],
+			['Germany               ',   54],
+			['Canada                ',   43],
+			['France                ',   35],
+			['Netherlands           ',   31],
+			['Australia             ',   28],
+			['Russian Federation    ',   24],
+			['Spain                 ',   19],
+			['Poland                ',   18],
+			['Brazil                ',   18],
+			['Italy                 ',   17],
+			['Sweden                ',   16],
+			['Israel                ',   14],
+			['Ukraine               ',   12],
+			['South Africa          ',   12],
+			['Austria               ',   12],
+			['Switzerland           ',   11],
+			['Pakistan              ',   11],
+			['New Zealand           ',    9],
+			['Bulgaria              ',    9],
+			['Turkey                ',    9],
+			['Bangladesh            ',    8],
+			['Argentina             ',    8],
+			['Serbia                ',    8],
+			['Portugal              ',    8],
+			['Czech Republic        ',    7],
+			['China                 ',    6],
+			['Denmark               ',    6],
+			['Ireland               ',    6],
+			['Nigeria               ',    6],
+			['Hong Kong (S.A.R.)    ',    6],
+			['Iran                  ',    6],
+			['Greece                ',    5],
+			['Singapore             ',    5],
+			['Croatia               ',    5],
+			['Norway                ',    5],
+			['Egypt                 ',    4],
+			['Chile                 ',    4],
+			['Finland               ',    4],
+			['South Korea           ',    4],
+			['Mexico                ',    4],
+			['United Arab Emirates  ',    4],
+			['Malaysia              ',    4],
+			['Slovenia              ',    4],
+			['Philippines           ',    3],
+			['Thailand              ',    3],
+			['Japan                 ',    3],
+			['Sri Lanka             ',    3],
+			['Hungary               ',    3],
+			['Estonia               ',    3],
+			['Nepal                 ',    3],
+			['Belgium               ',    2],
+			['Dominican Republic    ',    2],
+			['Luxembourg            ',    2],
+			['Nicaragua             ',    2],
+			['Cambodia              ',    2],
+			['Ecuador               ',    2],
+			['Romania               ',    2],
+			['Latvia                ',    2],
+			['Uganda                ',    2],
+			['Kenya                 ',    2],
+			['Ghana                 ',    2],
+			['Bosnia and Herzegovina',    2],
+			['Viet Nam              ',    1],
+			['Mongolia              ',    1],
+			['Cape Verde            ',    1],
+			['Cyprus                ',    1],
+			['Guatemala             ',    1],
+			['Azerbaijan            ',    1],
+			['Republic of Moldova   ',    1],
+			['Afghanistan           ',    1],
+			['Bahrain               ',    1],
+			['Peru                  ',    1],
+			['Saudi Arabia          ',    1],
+			['Georgia               ',    1],
+			['Lithuania             ',    1],
+			['Zimbabwe              ',    1],
+			['Mauritius             ',    1],
+			['Antigua and Barbuda   ',    1],
+			['Belarus               ',    1],
+			['Iraq                  ',    1],
+			['Armenia               ',    1],
+			['Sierra Leone          ',    1],
+			['Colombia              ',    1],
+			['Burundi               ',    1]
+        ]);
+
+        var options = {
+          title: 'Total #of respondants',
+        };
+
+        var regions_div = document.getElementById('regions_div');
+        var chart = new google.visualization.GeoChart(regions_div);
+        
+        google.visualization.events.addListener(chart, 'ready', function () {
+          regions_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
+          //document.getElementById('png').outerHTML = '<a href="' + chart.getImageURI() + '">Printable version</a>';
+               
+                });
+        chart.draw(data, options);
+      }
+    </script>
+    <script>
+      html2canvas(document.querySelector("#capture")).then(canvas => {
+      document.body.appendChild(canvas)
+        });
+        </script>
+          <script>
+              $(document).ready(function () {
+                  var element = $("#html-content-holder"); // global variable
+                  var getCanvas; // global variable
+
+                  html2canvas(element, {
+                      onrendered: function (canvas) {
+                          $("#previewImage").append(canvas);
+                          getCanvas = canvas;
+                      }
+                  });
+
+                  $("#btn-Convert-Html2Image").on('click', function () {
+                      var imgageData = getCanvas.toDataURL("image/png");
+                      // Now browser starts downloading it instead of just showing it
+                      var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+                      $("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
+                  });
+              });
+
+        </script>
+
+        <!-- Style sheet for up/down/left/right arrow div -->
+        <style>
+
+          .uparrowdiv, .downarrowdiv, .leftarrowdiv, .rightarrowdiv{
+          width:400px;
+          min-height:30px; /*min height of DIV should be set to at least 2x the width of the arrow*/
+          background: rgb(219, 216, 216);
+          color:rgb(0, 0, 0);
+          padding:35px;
+          position:relative;
+          word-wrap:break-word;
+          -moz-border-radius:5px; /*add some nice CSS3 round corners*/
+          -webkit-border-radius:5px;
+          border-radius:5px;
+          margin-bottom:2em;
+          }
+          
+          .uparrowdiv:after{ /*arrow added to uparrowdiv DIV*/
+          content:'';
+          display:block;
+          position:absolute;
+          top:-20px; /*should be set to -border-width x 2 */
+          left:30px;
+          width:0;
+          height:0;
+          border-color: transparent transparent black transparent; /*border color should be same as div div background color*/
+          border-style: solid;
+          border-width: 10px;
+          
+          }
+          
+          .downarrowdiv:after{ /*arrow added to downarrowdiv DIV*/
+          content:'';
+          display:block;
+          position:absolute;
+          top:100%; /*should be set to 100% */
+          left:30px;
+          width:0;
+          height:0;
+          border-color: black transparent transparent transparent; /*border color should be same as div div background color*/
+          border-style: solid;
+          border-width: 10px;
+          }
+          
+          .leftarrowdiv:after{ /*arrow added to leftarrowdiv DIV*/
+          content:'';
+          display:block;
+          position:absolute;
+          top:10px;
+          left:-60px; /*should be set to -border-width x 2 */
+          width:0;
+          height:0;
+          border-color: transparent rgb(219, 216, 216) transparent transparent; /*border color should be same as div div background color*/
+          border-style: solid;
+          border-width: 30px;
+          }
+          
+          .rightarrowdiv:after{ /*arrow added to rightarrowdiv DIV*/
+          content:'';
+          display:block;
+          position:absolute;
+          top:10px;
+          left:100%; /*should be set to 100% */
+          width:0;
+          height:0;
+          border-color: transparent transparent transparent rgb(219, 216, 216); /*border color should be same as div div background color*/
+          border-style: solid;
+          border-width: 30px;
+          }
+          
+          </style>
+          
+  </body>
+</html>
